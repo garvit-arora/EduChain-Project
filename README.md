@@ -36,10 +36,6 @@ This project is a blockchain-based solution developed during the **EDU CHAIN BUI
 - **Web3 Wallet Integration**:
   ![MetaMask](https://img.shields.io/badge/MetaMask-F6851D?style=flat&logo=metamask&logoColor=white)
 
-### Decentralized Storage
-- **Storage**:
-  ![IPFS](https://img.shields.io/badge/IPFS-000000?style=flat&logo=ipfs&logoColor=white)
-
 ---
 
 ## **Installation and Setup**
@@ -53,3 +49,16 @@ This project is a blockchain-based solution developed during the **EDU CHAIN BUI
    ```bash
    git clone https://github.com/your-username/esports-blockchain.git
    cd esports-blockchain
+2. Install dependencies:
+   ```bash
+   npm install
+3. Deploy Smart Contracts:
+
+1) Navigate to the /contracts folder.
+2) Deploy using Truffle or Hardhat (depending on your choice of framework):
+  ```bash
+  truffle migrate --network <network_name>
+
+
+
+
