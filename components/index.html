@@ -1,0 +1,642 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NFTrena - Blockchain Esports Platform</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+
+        body {
+            font-family: 'Press Start 2P', cursive;
+            margin: 0;
+            padding: 0;
+            background-color: #0d1117;
+            color: #c9d1d9;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            background: linear-gradient(90deg, #ff7eb3, #ff758c);
+            padding: 20px 0;
+            text-align: center;
+            animation: gradient 5s ease infinite;
+            background-size: 200% 200%;
+        }
+
+        @keyframes gradient {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            color: #ffffff;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        nav {
+            margin-top: 20px;
+        }
+
+        nav a {
+            color: #ffffff;
+            text-decoration: none;
+            margin: 0 15px;
+            font-size: 1em;
+            transition: color 0.3s ease;
+        }
+
+        nav a:hover {
+            color: #ffd700;
+        }
+
+        main {
+            padding: 40px 0;
+        }
+
+        .hero {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .hero h2 {
+            font-size: 2em;
+            margin-bottom: 20px;
+            color: #ffd700;
+        }
+
+        .hero p {
+            font-size: 1em;
+            margin-bottom: 30px;
+            line-height: 1.6;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background-color: #ff758c;
+            color: #ffffff;
+            padding: 15px 30px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-size: 1em;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 4px 8px rgba(255, 117, 140, 0.5);
+        }
+
+        .features {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            margin-top: 40px;
+        }
+
+        .feature {
+            flex-basis: calc(33.333% - 20px);
+            margin-bottom: 30px;
+            background-color: #1f2937;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+
+        .feature:hover {
+            transform: translateY(-5px);
+        }
+
+        .feature h3 {
+            font-size: 1.2em;
+            margin-bottom: 15px;
+            color: #ffd700;
+        }
+
+        .feature p {
+            font-size: 0.9em;
+            line-height: 1.5;
+        }
+
+        .tournaments {
+            margin-top: 60px;
+        }
+
+        .tournaments h2 {
+            font-size: 1.8em;
+            margin-bottom: 30px;
+            text-align: center;
+            color: #ffd700;
+        }
+
+        .tournament-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+
+        .tournament-card {
+            background-color: #1f2937;
+            border-radius: 10px;
+            padding: 20px;
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .tournament-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 4px 8px rgba(255, 255, 255, 0.1);
+        }
+
+        .tournament-card h3 {
+            font-size: 1.2em;
+            margin-bottom: 10px;
+            color: #ffd700;
+        }
+
+        .tournament-card p {
+            font-size: 0.9em;
+            margin-bottom: 15px;
+        }
+
+        .tournament-card .prize {
+            font-size: 1.1em;
+            color: #ff758c;
+            font-weight: bold;
+        }
+
+        .wallet-connection {
+            text-align: center;
+            margin-top: 40px;
+        }
+
+        #connectWallet {
+            background-color: #4CAF50;
+            border: none;
+            color: white;
+            padding: 15px 32px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 4px 2px;
+            cursor: pointer;
+            border-radius: 12px;
+            transition: background-color 0.3s ease;
+        }
+
+        #connectWallet:hover {
+            background-color: #45a049;
+        }
+
+        #connectWallet:disabled {
+            background-color: #cccccc;
+            cursor: not-allowed;
+        }
+
+        #walletAddress {
+            margin-top: 20px;
+            font-size: 0.9em;
+            color: #ffd700;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0,0,0,0.4);
+        }
+
+        .modal-content {
+            background-color: #1f2937;
+            margin: 15% auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%;
+            max-width: 500px;
+            border-radius: 10px;
+        }
+
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .close:hover {
+            color: #ffd700;
+        }
+
+        #depositAmount {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            background-color: #2d3748;
+            color: white;
+        }
+
+        #depositButton {
+            width: 100%;
+            padding: 10px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        #depositButton:hover {
+            background-color: #45a049;
+        }
+
+        .notification {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background-color: #4CAF50;
+            color: white;
+            padding: 15px;
+            border-radius: 5px;
+            z-index: 1000;
+            opacity: 1;
+            transition: opacity 0.5s ease;
+        }
+
+        footer {
+            background-color: #1f2937;
+            color: #ffffff;
+            text-align: center;
+            padding: 20px 0;
+            margin-top: 60px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>NFTrena</h1>
+            <nav>
+                <a href="#home">Home</a>
+                <a href="#features">Features</a>
+                <a href="#tournaments">Tournaments</a>
+                <a href="#wallet">Connect Wallet</a>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <div class="container">
+            <section id="home" class="hero">
+                <h2>Welcome to NFTrena</h2>
+                <p>Experience the future of esports with blockchain technology. Join tournaments, win prizes, and own your gaming journey!</p>
+                <a href="#" class="cta-button">Get Started</a>
+            </section>
+
+            <section id="features" class="features">
+                <div class="feature">
+                    <h3>Instant Payouts</h3>
+                    <p>Receive your winnings instantly through smart contracts, ensuring transparency and trust.</p>
+                </div>
+                <div class="feature">
+                    <h3>NFT Rewards</h3>
+                    <p>Earn unique NFTs for your achievements, showcasing your skills and progress.</p>
+                </div>
+                <div class="feature">
+                    <h3>Fair Play</h3>
+                    <p>Our blockchain-based system ensures fair matchmaking and prevents cheating.</p>
+                </div>
+            </section>
+
+            <section id="tournaments" class="tournaments">
+                <h2>Upcoming Tournaments</h2>
+                <div class="tournament-list">
+                    <!-- Tournament cards will be loaded dynamically -->
+                </div>
+            </section>
+
+            <section id="wallet" class="wallet-connection">
+                <h2>Connect Your Wallet</h2>
+                <button id="connectWallet">Connect Wallet</button>
+                <p id="walletAddress"></p>
+            </section>
+        </div>
+    </main>
+
+    <div id="depositModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Deposit Prize</h2>
+            <input type="number" id="depositAmount" placeholder="Enter amount in MATIC">
+            <button id="depositButton">Deposit</button>
+        </div>
+    </div>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 NFTrena. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="https://cdn.ethers.io/lib/ethers-5.7.0.umd.min.js" type="application/javascript"></script>
+    <script>
+        // Initialize variables
+        let provider;
+        let signer;
+        let account;
+        let contract;
+
+        const contractAddress = "0xYourContractAddressHere";
+        const contractABI = [
+            {
+                "inputs": [],
+                "name": "depositPrize",
+                "outputs": [],
+                "stateMutability": "payable",
+                "type": "function"
+            },
+            {
+                "inputs": [
+                    {
+                        "internalType": "address payable",
+                        "name": "winner",
+                        "type": "address"
+                    },
+                    {
+                        "internalType": "uint256",
+                        "name": "amount",
+                        "type": "uint256"
+                    }
+                ],
+                "name": "claimPrize",
+                "outputs": [],
+                "stateMutability": "nonpayable",
+                "type": "function"
+            },
+            {
+                "inputs": [],
+                "name": "getBalance",
+                "outputs": [
+                    {
+                        "internalType": "uint256",
+                        "name": "",
+                        "type": "uint256"
+                    }
+                ],
+                "stateMutability": "view",
+                "type": "function"
+            }
+        ];
+
+        // Helper function to update UI when wallet is connected
+        const updateWalletUI = (address) => {
+            const walletAddressDisplay = document.getElementById('walletAddress');
+            const connectWalletButton = document.getElementById('connectWallet');
+            
+            if (address) {
+                const truncatedAddress = `${address.substring(0, 6)}...${address.substring(address.length - 4)}`;
+                walletAddressDisplay.textContent = `Connected: ${truncatedAddress}`;
+                connectWalletButton.textContent = 'Wallet Connected';
+                connectWalletButton.disabled = true;
+            } else {
+                walletAddressDisplay.textContent = '';
+                connectWalletButton.textContent = 'Connect Wallet';
+                connectWalletButton.disabled = false;
+            }
+        };
+
+        // Initialize Web3 connection
+        const initializeWeb3 = async () => {
+            if (typeof window.ethereum !== 'undefined') {
+                try {
+                    provider = new ethers.providers.Web3Provider(window.ethereum);
+                    
+                    window.ethereum.on('chainChanged', (_chainId) => window.location.reload());
+                    
+                    window.ethereum.on('accountsChanged', (accounts) => {
+                        if (accounts.length === 0) {
+                            account = null;
+                            updateWalletUI(null);
+                        } else {
+                            account = accounts[0];
+                            updateWalletUI(account);
+                        }
+                    });
+
+                    const accounts = await provider.listAccounts();
+                    if (accounts.length > 0) {
+                        account = accounts[0];
+                        updateWalletUI(account);
+                        
+                        signer = provider.getSigner();
+                        contract = new ethers.Contract(contractAddress, contractABI, signer);
+                    }
+                } catch (error) {
+                    console.error('Error initializing Web3:', error);
+                    showNotification('Error initializing Web3. Please refresh the page.');
+                }
+            }
+        };
+
+        // Connect wallet function
+        const connectWallet = async () => {
+            if (typeof window.ethereum !== 'undefined') {
+                try {
+                    const accounts = await window.ethereum.request({
+                        method: 'eth_requestAccounts'
+                    });
+                    
+                    account = accounts[0];
+                    updateWalletUI(account);
+
+                    provider = new ethers.providers.Web3Provider(window.ethereum);
+                    signer = provider.getSigner();
+                    contract = new ethers.Contract(contractAddress, contractABI, signer);
+
+                    const network = await provider.getNetwork();
+                    if (network.chainId !== 137) { // Polygon Mainnet
+                        try {
+                            await window.ethereum.request({
+                                method: 'wallet_switchEthereumChain',
+                                params: [{ chainId: '0x89' }], // 137 in hex
+                            });
+                        } catch (error) {
+                            if (error.code === 4902) {
+                                await window.ethereum.request({
+                                    method: 'wallet_addEthereumChain',
+                                    params: [{
+                                        chainId: '0x89',
+                                        chainName: 'Polygon Mainnet',
+                                        nativeCurrency: {
+                                            name: 'MATIC',symbol: 'MATIC',
+                                            decimals: 18
+                                        },
+                                        rpcUrls: ['https://polygon-rpc.com/'],
+                                        blockExplorerUrls: ['https://polygonscan.com/']
+                                    }]
+                                });
+                            }
+                        }
+                    }
+
+                    showNotification('Wallet connected successfully!');
+                } catch (error) {
+                    console.error('Error connecting wallet:', error);
+                    showNotification('Failed to connect wallet. Please try again.');
+                }
+            } else {
+                showNotification('Please install MetaMask to use this feature!');
+            }
+        };
+
+        // Deposit functionality
+        const depositModal = document.getElementById('depositModal');
+        const closeModal = document.getElementsByClassName('close')[0];
+        const depositButton = document.getElementById('depositButton');
+
+        // Modal controls
+        closeModal.onclick = () => {
+            depositModal.style.display = "none";
+        };
+
+        window.onclick = (event) => {
+            if (event.target == depositModal) {
+                depositModal.style.display = "none";
+            }
+        };
+
+        depositButton.onclick = async () => {
+            const amount = document.getElementById('depositAmount').value;
+            if (!amount || isNaN(amount) || amount <= 0) {
+                showNotification("Please enter a valid amount");
+                return;
+            }
+
+            try {
+                const tx = await contract.depositPrize({ 
+                    value: ethers.utils.parseEther(amount.toString()) 
+                });
+                showNotification('Transaction pending...');
+                
+                await tx.wait();
+                showNotification(`Successfully deposited ${amount} MATIC`);
+                depositModal.style.display = "none";
+                document.getElementById('depositAmount').value = '';
+            } catch (error) {
+                console.error("Error depositing prize:", error);
+                showNotification(`Deposit failed: ${error.message}`);
+            }
+        };
+
+        // Tournament functionality
+        function showTournamentDetails(card) {
+            const title = card.querySelector('h3').textContent;
+            const date = card.querySelector('p').textContent;
+            const prize = card.querySelector('.prize').textContent;
+            showNotification(`${title}\n${date}\n${prize}\nRegistration coming soon!`);
+        }
+
+        function loadTournaments() {
+            const tournamentList = document.querySelector('.tournament-list');
+            tournamentList.innerHTML = '<p>Loading tournaments...</p>';
+
+            setTimeout(() => {
+                tournamentList.innerHTML = '';
+                const tournaments = [
+                    { name: "Fortnite Battle Royale", date: "July 15, 2024", prize: "5000 MATIC" },
+                    { name: "League of Legends Championship", date: "August 1, 2024", prize: "10000 MATIC" },
+                    { name: "CS:GO Showdown", date: "August 20, 2024", prize: "7500 MATIC" },
+                    { name: "Dota 2 International", date: "September 5, 2024", prize: "15000 MATIC" }
+                ];
+
+                tournaments.forEach(tournament => {
+                    const card = document.createElement('div');
+                    card.className = 'tournament-card';
+                    card.innerHTML = `
+                        <h3>${tournament.name}</h3>
+                        <p>Date: ${tournament.date}</p>
+                        <p class="prize">Prize Pool: ${tournament.prize}</p>
+                    `;
+                    card.addEventListener('click', () => showTournamentDetails(card));
+                    tournamentList.appendChild(card);
+                });
+
+                // Add hover effects to new cards
+                const newCards = document.querySelectorAll('.tournament-card');
+                newCards.forEach(card => {
+                    card.addEventListener('mouseover', () => {
+                        card.style.transform = 'translateY(-10px)';
+                        card.style.boxShadow = '0 10px 20px rgba(255, 215, 0, 0.2)';
+                    });
+                    card.addEventListener('mouseout', () => {
+                        card.style.transform = 'translateY(0)';
+                        card.style.boxShadow = 'none';
+                    });
+                });
+            }, 1000);
+        }
+
+        // Notification system
+        function showNotification(message) {
+            const notification = document.createElement('div');
+            notification.className = 'notification';
+            notification.textContent = message;
+            document.body.appendChild(notification);
+
+            setTimeout(() => {
+                notification.style.opacity = '0';
+                setTimeout(() => {
+                    document.body.removeChild(notification);
+                }, 500);
+            }, 3000);
+        }
+
+        // Initialize everything on page load
+        window.addEventListener('load', () => {
+            initializeWeb3();
+            loadTournaments();
+        });
+
+        // Event Listeners
+        document.getElementById('connectWallet').addEventListener('click', connectWallet);
+        
+        document.querySelector('.cta-button').addEventListener('click', (e) => {
+            e.preventDefault();
+            showNotification('Registration opening soon. Stay tuned!');
+        });
+
+        // Add refresh button for tournaments
+        const refreshButton = document.createElement('button');
+        refreshButton.textContent = 'Refresh Tournaments';
+        refreshButton.style.cssText = `
+            margin-top: 20px;
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        `;
+        document.querySelector('.tournaments').appendChild(refreshButton);
+        refreshButton.addEventListener('click', loadTournaments);
+    </script>
+</body>
+</html>
