@@ -20,7 +20,7 @@ This project is a blockchain-based solution developed during the **EDU CHAIN BUI
 
 ### Blockchain and Smart Contracts
 - **Blockchain Platform**: 
-  ![Ethereum](https://img.shields.io/badge/Ethereum-3C3C3C?style=flat&logo=ethereum&logoColor=white)
+  ![EDU CHAIN](https://img.shields.io/badge/Ethereum-3C3C3C?style=flat&logo=ethereum&logoColor=white)
 - **Smart Contracts**: 
   ![Solidity](https://img.shields.io/badge/Solidity-363636?style=flat&logo=solidity&logoColor=white)
 
