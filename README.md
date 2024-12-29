@@ -20,7 +20,8 @@ This project is a blockchain-based solution developed during the **EDU CHAIN BUI
 
 ### Blockchain and Smart Contracts
 - **Blockchain Platform**: 
-  ![EDU CHAIN](https://img.shields.io/badge/Ethereum-3C3C3C?style=flat&logo=ethereum&logoColor=white)
+  ![EDU CHAIN]([https://img.shields.io/badge/Ethereum-3C3C3C?style=flat&logo=ethereum&logoColor=white](https://img.shields.io/badge/EDU%20CHAIN
+))
 - **Smart Contracts**: 
   ![Solidity](https://img.shields.io/badge/Solidity-363636?style=flat&logo=solidity&logoColor=white)
 
@@ -42,7 +43,7 @@ This project is a blockchain-based solution developed during the **EDU CHAIN BUI
 ### Prerequisites
 - Node.js (v14 or higher)
 - npm (v6 or higher)
-- Ethereum Wallet (e.g., MetaMask) for interacting with smart contracts
+- Metamask for interacting with smart contracts
 
 ### Steps
 1. Clone the repository:
